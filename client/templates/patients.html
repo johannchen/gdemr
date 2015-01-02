@@ -1,0 +1,40 @@
+<template name="patients">
+  
+    <div class="container">
+      {{#if isInRole 'admin' 'doctor'}}
+        
+      <div class="row">
+        <div class="col-lg-12"> 
+          <table class="table table-striped">
+            <thead>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Birthday</th>
+            <th>Phone</th>
+            <th>Email</th>            
+            <th></th>
+            </thead>
+            <tbody>
+            {{#each patients}}
+            <tr>
+              {{#with profile}}
+              <td><a href="/patients/{{../_id}}">{{name}}</a></td>
+              <td>{{gender}}</td>
+              <td>{{birthday}}</td>
+              <td>{{phone}}</td>
+              <td>{{email}}</td>                    
+              {{/with}}             
+            </tr>
+            {{/each}}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+     
+      {{else}}
+        <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
+      {{/if}}
+    </div>       
+
+</template>

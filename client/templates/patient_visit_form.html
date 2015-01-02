@@ -1,0 +1,193 @@
+<template name="patientVisitForm">
+  <div class="container">
+    
+    <div class="row">
+        <div class="col-lg-12">
+          <ol class="breadcrumb">
+            {{#with profile}}
+              {{> patientInfo}}
+            {{/with}}
+            <li><a href="/patient/{{_id}}/profile">Profile</a></li>
+          </ol>
+        </div>
+      </div>
+    <h4>{{#if vid}}Eidt {{else}}New {{/if}}Visit</h4>
+    <div class="row">
+      <div class="col-lg-12">
+        {{#if isInRole 'admin' 'doctor'}}
+        {{#with visit}}
+        <form name="visitForm">
+          <div class="form-group">
+            <label for="visit_date">Visit Date </label>
+            <input class="form-control" name="visit_date" id="visitDate" value="{{visitDate}}" required="" type="date">
+          </div>
+          <div class="form-group">
+            <label for="complaint">Chief Complaint </label>
+            <input class="form-control" name="complaint" id="complaint" value="{{chiefComplaint}}" required="" type="text">
+          </div>
+          <div class="form-group">
+            <label for="vital_sign">Vital Signs</label>
+            <div class="form-inline">
+              <div class="form-group">
+                <label class="sr-only" for="temperature">Temperature </label>
+                <input class="form-control" id="temperature" value="{{vitalSign.temperature}}" placeholder="T (C)" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="bp">BP</label>
+                <input class="form-control" id="bp" value="{{vitalSign.bp}}" placeholder="BP" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="pulse">Pulse </label>
+                <input class="form-control" id="pulse" value="{{vitalSign.pulse}}" placeholder="P (bpm)" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="rr">RR</label>
+                <input class="form-control" id="rr" value="{{vitalSign.rr}}" placeholder="RR" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="o2">Oxygen saturation</label>
+                <input class="form-control" id="o2" value="{{vitalSign.o2}}" placeholder="O2 (%)" type="text">
+              </div>
+            </div>
+            <div class="form-inline">
+              <div class="form-group">
+                <label class="sr-only" for="weight">Weight</label>
+                <input class="form-control" id="weight" value="{{vitalSign.weight}}" placeholder="Wt (kg)" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="height">Height</label>
+                <input class="form-control" id="height" value="{{vitalSign.height}}" placeholder="Ht (cm)" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="bmi">BMI </label>
+                <input class="form-control" id="bmi" value="{{vitalSign.bmi}}" placeholder="BMI" type="text">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="hc">Pediatric HC</label>
+                <input class="form-control" id="hc" value="{{vitalSign.hc}}" placeholder="HC (cm)" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subjective">Subjective </label>
+            <textarea class="form-control" id="subjective" value="{{subjective}}" rows="3"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="physical">Physical Exam</label>
+            <div class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="general">General</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="general" value="{{physical.general}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="heent">HEENT </label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="heent" value="{{physical.heent}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="neck">Neck </label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="neck" value="{{physical.neck}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="respiratory">Respiratory</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="respiratory" value="{{physical.respiratory}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="cardiac">Cardiac</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="cardiac" value="{{physical.cardiac}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="abdomen">Abdomen</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="abdomen" value="{{physical.abdomen}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="gu">GU</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="gu" value="{{physical.gu}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="rectal">Rectal  </label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="rectal" value="{{physical.rectal}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="extremities">Extremities  </label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="extremities" value="{{physical.extremities}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="back">Back </label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="back" ng-model="visit.physical.back" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="skin">Skin</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="skin" value="{{physical.skin}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="breast">Breast</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="breast" value="{{physical.breast}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="neuro">Neuro</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="neuro" value="{{physical.neuro}}" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="psych">Psych</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="psych" value="{{physical.psych}}" type="text">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="assessment">Assessment</label>
+            <textarea class="form-control" id="assessment" value="{{assessment}}" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="tests">Tests (Labs / Imaging)</label>
+            <textarea class="form-control" id="tests" value="{{tests}}" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="plan">Plan (If any new medicine prescription or allergy reaction, please add them at the patient history)</label>
+            <textarea class="form-control" id="plan" value="{{plan}}" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="follow_up">Follow up </label>
+            <input class="form-control" name="follow_up" id="followUp" value="{{followUp}}" type="text">
+          </div>
+          
+          <button class="btn btn-primary save">Save</button>
+        </form>    
+        {{/with}}
+        {{else}}
+        <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
+        {{/if}}
+
+      </div>
+    </div>
+  </div>       
+
+</template>
