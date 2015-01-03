@@ -3,20 +3,8 @@
   <div class="container">
     {{#if isInRole 'admin' 'doctor'}}
 
-    <div class="row">
-      <div class="col-lg-12">
-        <ol class="breadcrumb">
-          {{#with profile}}
-          {{> patientInfo}}
-          {{/with}}
-        </ol>
-      </div>
-    </div>
-    <ul class="nav nav-tabs">
-      <li role="presentation"><a href="/patients/{{pid}}">Summary</a></li>
-      <li role="presentation" class="active"><a href="/patients/{{pid}}/visits">Visits</a></li>
-      <li role="presentation"><a href="/patients/{{pid}}/profile">Profile</a></li>     
-    </ul>
+    {{> patientNav}}
+    
 
     <div class="row">
       <div class="col-md-12">
@@ -62,6 +50,8 @@
           <p><strong>Tests: </strong> {{tests}}</p>
           <p><strong>Plan: </strong> {{plan}}</p>
           <p><strong>Followup: </strong> {{followUp}}</p>
+          <p><strong>Created By: {{userName createdBy}}</strong></p>
+          <p><strong>Created At: {{createdAt}}</strong></p>
           <p><strong>Last Updated By: {{userName updatedBy}}</strong></p>
           <p><strong>Last Updated At: {{updatedAt}}</strong></p>
         </div>

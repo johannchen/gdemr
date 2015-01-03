@@ -2,22 +2,15 @@
   
     <div class="container">
       {{#if isInRole 'admin' 'doctor'}}
-      {{> patientInfo}}
+      {{> patientNav}}
       {{#with patient}}
       
-      <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#">Summary</a></li>
-        <li role="presentation"><a href="/patients/{{_id}}/visits">Visits</a></li>
-        <li role="presentation"><a href="/patients/{{_id}}/profile">Profile</a></li>     
-      </ul>
-
-
       <div class="row">
         <div class="col-md-6">
           <h4>Last Visit</h4>
           <div class="visit">
             <p><strong>Visit Date: </strong>
-              <a href="/patient#/53a839ff3830660002000000/visits/"></a>
+              
             </p>
             <p><strong>Chief Complaint: </strong></p>
             <p></p>
@@ -49,7 +42,7 @@
         </div>
         <div class="col-md-6">
           <div class="category">
-            <a href="/patient#/53a839ff3830660002000000/medications">Current Medications</a>
+            <a href="">Current Medications</a>
           </div>
           <form class="form-inline" name="medicationForm">
             <div class="form-group">
@@ -64,11 +57,14 @@
           </form>
           <table class="table" id="medications">
             <tbody>
+              {{#each medications}}
               <tr>
-                <td width="40%">M1
+                <td width="40%">
+                  {{name}}
                 </td>
-                <td>1/day</td>
+                <td>{{dose}}</td>
               </tr>
+              {{/each}}
             </tbody>
           </table>
           <div class="category">

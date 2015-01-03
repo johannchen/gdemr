@@ -1,0 +1,28 @@
+<template name="patientNav">
+  {{#with patient}}
+  <div class="row">
+    <div class="col-lg-12">
+
+      <ol class="breadcrumb">
+       <li class="active"><strong>{{name}}</strong></li>
+       {{#with profile}}
+       <li class="active">Gender: {{gender}}</li>
+       <li class="active">DOB: {{birthday}}</li>
+       <li class="active">Phone: {{phone}}</li>
+       <li class="active">Email: {{email}}</li>          
+       {{/with}}
+     </ol>
+
+   </div>
+ </div>
+ <ul class="nav nav-tabs">
+  <li role="presentation" class="{{isSummaryLink currentLink}}"><a href="/patients/{{_id}}" id="summary">Summary</a></li>
+  <li role="presentation" class="{{isVisitLink currentLink}}"><a href="/patients/{{_id}}/visits" id="visits">Visits</a></li>
+  <li role="presentation" class="{{isMedicationLink currentLink}}"><a href="/patients/{{_id}}/medications" id="medications">Medications</a></li>
+  <li role="presentation" class="{{isProfileLink currentLink}}"><a href="/patients/{{_id}}/profile" id="profile">Profile</a></li>     
+</ul>
+{{/with}}
+
+
+
+</template>

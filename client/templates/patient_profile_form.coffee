@@ -36,5 +36,6 @@ Template.patientProfileForm.events
 				else
 					# set session patientId? more effectient than set data in route?
 					Session.set 'pid', result
+					Session.set 'currentLink', 'profile'
 					Router.go '/patients/' + result + '/profile'
 			

@@ -3,7 +3,7 @@ Template.patientVisitForm.events
 		console.log 'click save button'
 		pid = $('#pid').val()
 		vid = $('#vid').val()
-		data =
+		visit =
 			patientId: pid
 			doctorId: Meteor.userId()
 			visitDate: $('#visitDate').val()
@@ -42,14 +42,14 @@ Template.patientVisitForm.events
 
 		if (vid)
 			#update visit
-			console.log("update vist" + vid)
-			Visits.update vid,
-				$set: data
+			Meteor.call('updateVisit', vid, visit)
+			Router.go '/patients/' + pid + '/visits/' + vid 
 		else
-			#insert visit
-			console.log("insert visit")
-			vid = Visits.insert data
-			
-		Router.go '/patients/' + pid + '/visits/' + vid
+			visit.createdAt = new Date()
+			visit.createdBy = Meteor.userId()
+			Meteor.call 'addVisit', visit, (error, result) ->
+				if error
+				else
+					Router.go '/patients/' + pid + '/visits/' + result 
 		# prevent default form submit
 		false

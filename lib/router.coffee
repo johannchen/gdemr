@@ -34,14 +34,12 @@ Router.route '/patients/:_id/visits', ->
 	@render 'patientVisits',
 		data:
 			pid: @params._id
-			patient: Patients.findOne(@params._id)
 			visits: Visits.find({patientId: @params._id}, sort: {visitDate: -1})
 
 Router.route '/patients/:_id/visits/new', ->
 	@render 'patientVisitForm',
 		data:
 			pid: @params._id
-			patient: Patients.findOne(@params._id)
 			visit: {}
 
 Router.route '/patients/:_id/visits/:vid', ->
@@ -49,7 +47,6 @@ Router.route '/patients/:_id/visits/:vid', ->
 		data:
 			pid: @params._id
 			vid: @params.vid
-			profile: Patients.findOne(@params._id).profile
 			visit: Visits.findOne(@params.vid)
 
 Router.route '/patients/:_id/visits/:vid/edit', ->
@@ -57,7 +54,6 @@ Router.route '/patients/:_id/visits/:vid/edit', ->
 		data:
 			pid: @params._id
 			vid: @params.vid
-			profile: Patients.findOne(@params._id).profile
 			visit: Visits.findOne(@params.vid)
 
 

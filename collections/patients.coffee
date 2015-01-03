@@ -8,6 +8,11 @@ Meteor.methods
 			profile: profile
 			createdAt: new Date()
 			createdBy: Meteor.userId()
+	addMedication: (id, med) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update id,
+			$push:
+				medications: med
 	resetDB: ->
 		# for dev, remove on prod
 		Patients.remove({})

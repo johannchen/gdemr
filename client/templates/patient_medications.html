@@ -1,29 +1,26 @@
-<template name="patientVisits">
+<template name="patientMedications">
   
     <div class="container">
       {{#if isInRole 'admin' 'doctor'}}
-      
-      {{> patientNav}}
-            
-        
+      {{> patientNav}}  
       <div class="row">
         <div class="col-lg-12"> 
-          <p><a href="/patients/{{pid}}/visits/new">New Visit</a></p>
           <table class="table table-striped">
             <thead>
-            <th>Visit Date</th>
-            <th>Chief Complaint</th>
-            <th>Updated By</th>
-            <th>Last Updated</th>
+            <th>Name</th>
+            <th>Dose</th>
+            <th>Last Updated By</th>
+            <th>Last Updated At</th>
+            
             </thead>
             <tbody>
-            {{#each visits}}
+            {{#each medications}}
             <tr>
               
-              <td><a href="/patients/{{../pid}}/visits/{{_id}}">{{visitDate}}</a></td>
-              <td>{{chiefComplaint}}</td>
+              <td><a href="/patients/{{pid}}/medications/{{_id}}">{{name}}</a></td>              
+              <td>{{dose}}</td>
               <td>{{userName updatedBy}}</td>
-              <td>{{updatedAt}}</td>                                            
+              <td>{{updatedBy}}</td>             
             </tr>
             {{/each}}
             </tbody>

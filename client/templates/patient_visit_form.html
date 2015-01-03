@@ -2,13 +2,8 @@
   <div class="container">
     
     
-    {{> patientInfo}}
+    {{> patientNav}}
            
-     <ul class="nav nav-tabs">
-        <li role="presentation"><a href="/patients/{{pid}}">Summary</a></li>
-        <li role="presentation" class="active"><a href="/patients/{{pid}}/visits">Visits</a></li>
-        <li role="presentation"><a href="/patients/{{pid}}/profile">Profile</a></li>     
-      </ul>
     <h4>{{#if vid}}Eidt {{else}}New {{/if}}Visit</h4>
     <div class="row">
       <div class="col-lg-12">
