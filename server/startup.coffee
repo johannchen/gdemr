@@ -13,3 +13,5 @@ Meteor.startup ->
 	Meteor.methods
 		removeAllPatients: ->
 			Patients.remove({})
+		removeAllVisits: ->
+			Visits.remove({})

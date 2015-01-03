@@ -1,0 +1,51 @@
+<template name="patientVisits">
+  
+    <div class="container">
+      {{#if isInRole 'admin' 'doctor'}}
+      <div class="row">
+        <div class="col-lg-12">
+          <ol class="breadcrumb">
+            {{#with profile}}
+              {{> patientInfo}}
+            {{/with}}
+          </ol>
+        </div>
+      </div>
+      <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/patients/{{pid}}">Summary</a></li>
+        <li role="presentation" class="active"><a href="#">Visits</a></li>
+        <li role="presentation"><a href="/patients/{{pid}}/profile">Profile</a></li>     
+      </ul>
+        
+      <div class="row">
+        <div class="col-lg-12"> 
+          <p><a href="/patients/{{pid}}/visits/new">New Visit</a></p>
+          <table class="table table-striped">
+            <thead>
+            <th>Visit Date</th>
+            <th>Chief Complaint</th>
+            <th>Updated By</th>
+            <th>Last Updated</th>
+            </thead>
+            <tbody>
+            {{#each visits}}
+            <tr>
+              
+              <td><a href="/patients/{{../pid}}/visits/{{_id}}">{{visitDate}}</a></td>
+              <td>{{chiefComplaint}}</td>
+              <td>{{userName updatedBy}}</td>
+              <td>{{updatedAt}}</td>                                            
+            </tr>
+            {{/each}}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+     
+      {{else}}
+        <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
+      {{/if}}
+    </div>       
+
+</template>

@@ -10,12 +10,19 @@
           </ol>
         </div>
       </div>
+     <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/patients/{{pid}}">Summary</a></li>
+        <li role="presentation" class="active"><a href="/patients/{{pid}}/visits">Visits</a></li>
+        <li role="presentation"><a href="/patients/{{pid}}/profile">Profile</a></li>     
+      </ul>
     <h4>{{#if vid}}Eidt {{else}}New {{/if}}Visit</h4>
     <div class="row">
       <div class="col-lg-12">
         {{#if isInRole 'admin' 'doctor'}}
-        {{#with visit}}
         <form name="visitForm">
+          <input type="hidden" id="pid" value="{{pid}}">
+        {{#with visit}}
+        
           <div class="form-group">
             <label for="visit_date">Visit Date </label>
             <input class="form-control" name="visit_date" id="visitDate" value="{{visitDate}}" required="" type="date">
@@ -177,10 +184,10 @@
             <label for="follow_up">Follow up </label>
             <input class="form-control" name="follow_up" id="followUp" value="{{followUp}}" type="text">
           </div>
-          
+          {{/with}}
           <button class="btn btn-primary save">Save</button>
         </form>    
-        {{/with}}
+        
         {{else}}
         <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
         {{/if}}

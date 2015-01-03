@@ -16,3 +16,4 @@ UI.registerHelper "userName", (id) ->
 		username
 	else
 		Meteor.users.findOne(id).emails[0].address
+

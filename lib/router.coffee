@@ -29,6 +29,13 @@ Router.route '/patients/:_id/profile/edit', ->
 			pid: @params._id
 			profile: Patients.findOne(@params._id).profile
 
+Router.route '/patients/:_id/visits', ->
+	@render 'patientVisits',
+		data:
+			pid: @params._id
+			profile: Patients.findOne(@params._id).profile
+			visits: Visits.find({patientId: @params._id}, sort: {visitDate: -1})
+
 Router.route '/patients/:_id/visits/new', ->
 	@render 'patientVisitForm',
 		data:
@@ -37,6 +44,14 @@ Router.route '/patients/:_id/visits/new', ->
 			visit: {}
 
 Router.route '/patients/:_id/visits/:vid', ->
+	@render 'patientVisit',
+		data:
+			pid: @params._id
+			vid: @params.vid
+			profile: Patients.findOne(@params._id).profile
+			visit: Visits.findOne(@params.vid)
+
+Router.route '/patients/:_id/visits/:vid/edit', ->
 	@render 'patientVisitForm',
 		data:
 			pid: @params._id
@@ -46,8 +61,6 @@ Router.route '/patients/:_id/visits/:vid', ->
 
 
 ###
-
-
 Router.route '/profile', ->
 	@render 'profile'
 	return

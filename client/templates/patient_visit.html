@@ -1,0 +1,80 @@
+<template name="patientVisit">
+
+  <div class="container">
+    {{#if isInRole 'admin' 'doctor'}}
+
+    <div class="row">
+      <div class="col-lg-12">
+        <ol class="breadcrumb">
+          {{#with profile}}
+          {{> patientInfo}}
+          {{/with}}
+        </ol>
+      </div>
+    </div>
+    <ul class="nav nav-tabs">
+      <li role="presentation"><a href="/patients/{{pid}}">Summary</a></li>
+      <li role="presentation" class="active"><a href="/patients/{{pid}}/visits">Visits</a></li>
+      <li role="presentation"><a href="/patients/{{pid}}/profile">Profile</a></li>     
+    </ul>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Visit</h4>
+        {{#with visit}}
+        <div class="visit">
+          <p><strong>Visit Date: {{visitDate}} </strong>             
+          </p>
+          <p><strong>Chief Complaint: </strong> {{chiefComplaint}}</p>            
+          <ul class="list-inline">
+            <li><strong>T </strong>(C): {{vitalSign.temperature}}</li>
+            <li><strong>BP</strong>: {{vitalSign.bp}}</li>
+            <li><strong>P </strong>(bpm): {{vitalSign.pulse}}</li>
+            <li><strong>RR </strong>: {{vitalSign.rr}}</li>
+            <li><strong>O2 </strong>(%): {{vitalSign.o2}}</li>
+          </ul>
+          <ul class="list-inline">
+            <li><strong>Wt </strong>(kg): {{vitalSign.weight}}</li>
+            <li><strong>Ht </strong>(cm): {{vitalSign.height}}</li>
+            <li><strong>BMI </strong>: {{vitalSign.bmi}}</li>
+            <li><strong>HC </strong>(cm): {{vitalSign.hc}}</li>
+          </ul>
+          <p><strong>Subjective: </strong> {{subjective}}</p>
+          <p><strong>Physical Exam</strong></p>
+          <ul>
+            <li><strong>General: </strong> {{physical.general}}</li>
+            <li><strong>HEENT: </strong> {{physical.heent}}</li>
+            <li><strong>Neck: </strong> {{physical.neck}}</li>
+            <li><strong>Respiratory: </strong> {{physical.respiratory}}</li>
+            <li><strong>Cardiac: </strong> {{physical.cardiac}}</li>
+            <li><strong>Abdomen: </strong> {{physical.abdomen}}</li>
+            <li><strong>GU: </strong> {{physical.gu}}</li>
+            <li><strong>Rectal: </strong> {{physical.rectal}}</li>
+            <li><strong>Extremities: </strong> {{physical.extremities}}</li>
+            <li><strong>Back: </strong> {{physical.back}}</li>
+            <li><strong>Skin: </strong> {{physical.skin}}</li>
+            <li><strong>Breast: </strong> {{physical.breast}}</li>
+            <li><strong>Neuro: </strong> {{physical.neuro}}</li>
+            <li><strong>Psych: </strong> {{physical.psych}}</li>           
+          </ul>
+
+          <p><strong>Assessment: </strong> {{assessment}}</p>
+          <p><strong>Tests: </strong> {{tests}}</p>
+          <p><strong>Plan: </strong> {{plan}}</p>
+          <p><strong>Followup: </strong> {{followUp}}</p>
+          <p><strong>Last Updated By: {{userName updatedBy}}</strong></p>
+          <p><strong>Last Updated At: {{updatedAt}}</strong></p>
+        </div>
+        {{/with}}
+        <a href="/patients/{{pid}}/visits/{{vid}}/edit">Edit Visit</a>
+
+      </div>
+    </div>
+
+
+    {{else}}
+    <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
+    {{/if}}
+  </div>       
+
+</template>
