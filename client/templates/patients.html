@@ -17,8 +17,9 @@
             <tbody>
             {{#each patients}}
             <tr>
+              
+              <td><a href="/patients/{{_id}}" class="patient">{{name}}</a></td>
               {{#with profile}}
-              <td><a href="/patients/{{../_id}}">{{name}}</a></td>
               <td>{{gender}}</td>
               <td>{{birthday}}</td>
               <td>{{phone}}</td>

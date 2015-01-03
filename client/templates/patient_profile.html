@@ -1,15 +1,7 @@
 <template name="patientProfile">
   <div class="container">
     {{#if isInRole 'admin' 'doctor'}}
-    <div class="row">
-      <div class="col-lg-12">
-        <ol class="breadcrumb">
-          {{#with profile}}
-          {{> patientInfo}}
-          {{/with}}
-        </ol>
-      </div>
-    </div>
+    {{> patientInfo}}
     <ul class="nav nav-tabs">
         <li role="presentation"><a href="/patients/{{pid}}">Summary</a></li>
         <li role="presentation"><a href="/patients/{{pid}}/visits">Visits</a></li>
@@ -18,6 +10,7 @@
 
     <div class="row">
       <div class="col-lg-12"> 
+      {{#with patient}}
         {{#with profile}}                         
         <p><strong>Insurance: </strong>{{insurance}}</p>
         <p><strong>Nationality: </strong>{{nationality}}</p>
@@ -34,6 +27,7 @@
         <p>Last Updated At: {{updatedAt}}</p>
         <p>Last Updated By: {{userName updatedBy}}</p>             
         {{/with}} 
+      {{/with}}
         <div><a href="/patients/{{pid}}/profile/edit">Edit</a></div>     
 
 

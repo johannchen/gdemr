@@ -1,12 +1,17 @@
 @Patients = new Mongo.Collection('patients')
 
 Meteor.methods
-	addPatient: (profile) ->
+	addPatient: (name, profile) ->
 		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
 		Patients.insert
+			name: name
 			profile: profile
 			createdAt: new Date()
 			createdBy: Meteor.userId()
+	resetDB: ->
+		# for dev, remove on prod
+		Patients.remove({})
+		Visits.remove({})
 
 @Patients.allow
 	insert: (userId, patient) ->

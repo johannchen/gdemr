@@ -4,13 +4,14 @@
     <div class="row">
       <div class="col-lg-12">
         {{#if isInRole 'admin' 'doctor'}}
+        {{#with patient}}
         <form name="patientForm">
           <input type="hidden" name="pid" id="pid" value="{{pid}}">
-          {{#with profile}}
           <div class="form-group">
             <label for="name">Name</label>
             <input class="form-control" name="name" id="name" type="text" value="{{name}}" required>
           </div>
+          {{#with profile}}
           <div class="form-group">
             <label class="radio-inline">
               <input id="F" name="gender" type="radio" value="F" checked="{{isFemale gender}}">Female
@@ -83,8 +84,10 @@
             <input class="form-control" name="company" id="company" type="text" value="{{company}}">
           </div>
           {{/with}}
+
           <button class="btn btn-primary save" type="button">Save</button>
-        </form>         
+        </form>
+        {{/with}}         
         {{else}}
         <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
         {{/if}}

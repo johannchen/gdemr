@@ -2,16 +2,9 @@
   
     <div class="container">
       {{#if isInRole 'admin' 'doctor'}}
+      {{> patientInfo}}
       {{#with patient}}
-      <div class="row">
-        <div class="col-lg-12">
-          <ol class="breadcrumb">
-            {{#with profile}}
-              {{> patientInfo}}
-            {{/with}}
-          </ol>
-        </div>
-      </div>
+      
       <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#">Summary</a></li>
         <li role="presentation"><a href="/patients/{{_id}}/visits">Visits</a></li>

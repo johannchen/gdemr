@@ -10,7 +10,8 @@ Router.route '/patients', ->
 Router.route '/patients/new', ->
 	@render 'patientProfileForm',
 		data:
-			profile: {}
+			patient:
+				profile: {}
 
 Router.route '/patients/:_id', ->
 	@render 'patient',
@@ -27,20 +28,20 @@ Router.route '/patients/:_id/profile/edit', ->
 	@render 'patientProfileForm',
 		data:
 			pid: @params._id
-			profile: Patients.findOne(@params._id).profile
+			patient: Patients.findOne(@params._id)
 
 Router.route '/patients/:_id/visits', ->
 	@render 'patientVisits',
 		data:
 			pid: @params._id
-			profile: Patients.findOne(@params._id).profile
+			patient: Patients.findOne(@params._id)
 			visits: Visits.find({patientId: @params._id}, sort: {visitDate: -1})
 
 Router.route '/patients/:_id/visits/new', ->
 	@render 'patientVisitForm',
 		data:
 			pid: @params._id
-			profile: Patients.findOne(@params._id).profile
+			patient: Patients.findOne(@params._id)
 			visit: {}
 
 Router.route '/patients/:_id/visits/:vid', ->

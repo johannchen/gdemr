@@ -8,10 +8,3 @@ Meteor.startup ->
 	if me
 		unless Roles.userIsInRole(me._id, ['admin'])
 			Roles.addUsersToRoles me._id, ["admin"]
-
-	# for dev, remove them on prod
-	Meteor.methods
-		removeAllPatients: ->
-			Patients.remove({})
-		removeAllVisits: ->
-			Visits.remove({})

@@ -1,15 +1,9 @@
 <template name="patientVisitForm">
   <div class="container">
     
-    <div class="row">
-        <div class="col-lg-12">
-          <ol class="breadcrumb">
-            {{#with profile}}
-              {{> patientInfo}}
-            {{/with}}          
-          </ol>
-        </div>
-      </div>
+    
+    {{> patientInfo}}
+           
      <ul class="nav nav-tabs">
         <li role="presentation"><a href="/patients/{{pid}}">Summary</a></li>
         <li role="presentation" class="active"><a href="/patients/{{pid}}/visits">Visits</a></li>

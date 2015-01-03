@@ -6,8 +6,8 @@ UI.registerHelper 'isFemale', (gender) ->
 #TODO: use template.find instead of jquery
 Template.patientProfileForm.events
 	'click button.save': ->
-		data =
-			name: $('#name').val()
+		name = $('#name').val()
+		profile =
 			gender: $('input[name=gender]:checked').val()
 			birthday: $('#birthday').val()
 			email: $('#email').val()
@@ -31,9 +31,10 @@ Template.patientProfileForm.events
 				$set: {profile: data},
 			Router.go '/patients/' + pid + '/profile'
 		else
-			Meteor.call 'addPatient', data, (error, result) ->
+			Meteor.call 'addPatient', name, profile, (error, result) ->
 				if (error)
 				else
-					console.log(result)
+					# set session patientId? more effectient than set data in route?
+					Session.set 'pid', result
 					Router.go '/patients/' + result + '/profile'
 			
