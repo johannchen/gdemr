@@ -29,8 +29,11 @@ Template.patientProfileForm.events
 		if (pid)
 			Patients.update pid,
 				$set: {profile: data},
+			Router.go '/patients/' + pid + '/profile'
 		else
-			pid = Patients.insert
-				profile: data
+			Meteor.call 'addPatient', data, (error, result) ->
+				if (error)
+				else
+					console.log(result)
+					Router.go '/patients/' + result + '/profile'
 			
-		Router.go '/patients/' + pid + '/profile'

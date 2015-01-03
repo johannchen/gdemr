@@ -21,7 +21,7 @@ Router.route '/patients/:_id/profile', ->
 	@render 'patientProfile',
 		data:
 			pid: @params._id
-			profile: Patients.findOne(@params._id).profile
+			patient: Patients.findOne(@params._id)
 
 Router.route '/patients/:_id/profile/edit', ->
 	@render 'patientProfileForm',
