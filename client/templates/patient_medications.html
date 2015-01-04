@@ -1,37 +1,69 @@
 <template name="patientMedications">
-  
-    <div class="container">
-      {{#if isInRole 'admin' 'doctor'}}
-      {{> patientNav}}  
-      <div class="row">
-        <div class="col-lg-12"> 
-          <table class="table table-striped">
-            <thead>
+
+  <div class="container">
+    {{#if isInRole 'admin' 'doctor'}}
+    {{> patientNav}}  
+    <div class="row">
+      <div class="col-lg-6"> 
+        <h4>Current Medications</h4>          
+        <table class="table table-striped">
+          <thead>
             <th>Name</th>
             <th>Dose</th>
             <th>Last Updated By</th>
-            <th>Last Updated At</th>
-            
-            </thead>
-            <tbody>
+            <th>Last Updated At</th>            
+          </thead>
+          <tbody>
             {{#each medications}}
             <tr>
-              
-              <td><a href="/patients/{{pid}}/medications/{{_id}}">{{name}}</a></td>              
+              <td><a href="#" class="med">{{name}}</a></td>              
               <td>{{dose}}</td>
               <td>{{userName updatedBy}}</td>
-              <td>{{updatedBy}}</td>             
+              <td>{{updatedAt}}</td>             
             </tr>
             {{/each}}
-            </tbody>
-          </table>
-
-        </div>
+          </tbody>
+        </table>
       </div>
-     
-      {{else}}
-        <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
-      {{/if}}
-    </div>       
+      <div class="col-lg-6">
+        <h4>Medication Details View</h4>
+
+        {{#if editingMed}}
+        {{#with selectedMed}}
+        <form name="medicationForm">
+          <div class="form-group">
+            <label for="name">Medication</label>
+            <input class="form-control" name="name" id="medication" value="{{name}}" required="" type="text">
+          </div>
+          <div class="form-group">
+            <label for="dose">Dose </label>
+            <input class="form-control" name="dose" id="dose" value="{{dose}}" type="text">
+          </div>
+          <div class="form-group">
+            <label for="details">Details </label>
+            <textarea class="form-control" id="details" rows="3">{{details}}</textarea>
+          </div>
+          <button class="btn btn-primary" id="saveMed">Save</button>
+        </form>
+        {{/with}}
+
+        {{else}}
+        {{#with selectedMed}}
+        <p><strong>Medication: </strong>{{name}}</p>
+        <p><strong>Dose: </strong>{{dose}}</p>
+        <p><strong>Details: </strong>{{details}}</p>
+        <p>Created At: {{createdAt}}</p>
+        <p>Created By: {{userName createdBy}}</p>
+        <p>Last Updated At: {{updatedAt}}</p>
+        <p>Last Updated By: {{userName updatedBy}}</p>
+        <div><a href="" id="editMed">Edit</a></div> 
+        {{/with}} 
+        {{/if}}                
+      </div>
+    </div>
+    {{else}}
+    <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
+    {{/if}}
+  </div>       
 
 </template>

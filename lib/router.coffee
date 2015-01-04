@@ -56,6 +56,10 @@ Router.route '/patients/:_id/visits/:vid/edit', ->
 			vid: @params.vid
 			visit: Visits.findOne(@params.vid)
 
+Router.route '/patients/:_id/medications', ->
+	@render 'patientMedications',
+		data:
+			pid: @params._id
 
 ###
 Router.route '/profile', ->

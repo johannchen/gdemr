@@ -11,9 +11,10 @@ UI.registerHelper "formatDate", (datetime, format) ->
     datetime
 
 UI.registerHelper "userName", (id) ->
-	username = Meteor.users.findOne(id).profile.name
-	if username
-		username
-	else
-		Meteor.users.findOne(id).emails[0].address
+	if id
+		username = Meteor.users.findOne(id).profile.name
+		if username
+			username
+		else
+			Meteor.users.findOne(id).emails[0].address
 
