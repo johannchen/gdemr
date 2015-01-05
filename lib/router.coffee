@@ -61,6 +61,11 @@ Router.route '/patients/:_id/medications', ->
 		data:
 			pid: @params._id
 
+Router.route '/patients/:_id/allergies', ->
+	@render 'patientAllergies',
+		data:
+			pid: @params._id
+
 ###
 Router.route '/profile', ->
 	@render 'profile'

@@ -30,6 +30,10 @@ Meteor.methods
 		Patients.update id,
 			$push:
 				allergies: allergy
+	updateAllergy: (id, oldAllergy, newAllergy) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update {_id: id, allergies: oldAllergy},
+			$set: {"allergies.$": newAllergy}
 	resetDB: ->
 		# for dev, remove on prod
 		Patients.remove({})
