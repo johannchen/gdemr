@@ -17,6 +17,14 @@ Meteor.methods
 		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
 		Patients.update {_id: id, medications: oldMed},
 			$set: {"medications.$": newMed}
+	startMedication: (id, med) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update {_id: id, medications: med},
+			$set: {"medications.$.active": true}
+	stopMedication: (id, med) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update {_id: id, medications: med},
+			$set: {"medications.$.active": false}
 	resetDB: ->
 		# for dev, remove on prod
 		Patients.remove({})

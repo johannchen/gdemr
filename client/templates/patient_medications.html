@@ -14,12 +14,31 @@
             <th>Last Updated At</th>            
           </thead>
           <tbody>
-            {{#each medications}}
+            {{#each currentMedications}}
             <tr>
               <td><a href="#" class="med">{{name}}</a></td>              
               <td>{{dose}}</td>
               <td>{{userName updatedBy}}</td>
-              <td>{{updatedAt}}</td>             
+              <td>{{formatDate updatedAt 'long'}}</td>             
+            </tr>
+            {{/each}}
+          </tbody>
+				</table>
+				<h4>Past Medications</h4>          
+        <table class="table table-striped">
+          <thead>
+            <th>Name</th>
+            <th>Dose</th>
+            <th>Last Updated By</th>
+            <th>Last Updated At</th>            
+          </thead>
+          <tbody>
+            {{#each pastMedications}}
+            <tr>
+              <td><a href="#" class="med">{{name}}</a></td>              
+              <td>{{dose}}</td>
+              <td>{{userName updatedBy}}</td>
+              <td>{{formatDate updatedAt 'long'}}</td>             
             </tr>
             {{/each}}
           </tbody>
@@ -52,11 +71,23 @@
         <p><strong>Medication: </strong>{{name}}</p>
         <p><strong>Dose: </strong>{{dose}}</p>
         <p><strong>Details: </strong>{{details}}</p>
-        <p>Created At: {{createdAt}}</p>
+        <p>Created At: {{formatDate createdAt 'long'}}</p>
         <p>Created By: {{userName createdBy}}</p>
-        <p>Last Updated At: {{updatedAt}}</p>
+        <p>Last Updated At: {{formatDate updatedAt 'long'}}</p>
         <p>Last Updated By: {{userName updatedBy}}</p>
-        <div><a href="" id="editMed">Edit</a></div> 
+        <div>
+					<a href="" class="btn btn-default" id="editMed">Edit</a>
+					{{#if selectedMed.active}}
+					<button type="button" class="btn btn-warning" id="stopMed">
+						Stop Medication
+					</button>
+					{{else}}
+					<button type="button" class="btn btn-primary" id="startMed">
+						Start Medication
+					</button>
+					{{/if}}
+				
+				</div> 
         {{/with}} 
         {{/if}}                
       </div>
