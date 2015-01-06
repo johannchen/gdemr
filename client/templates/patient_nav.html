@@ -1,5 +1,4 @@
 <template name="patientNav">
-  {{#with patient}}
   <div class="row">
     <div class="col-lg-12">
 
@@ -18,11 +17,6 @@
  <ul class="nav nav-tabs">
   <li role="presentation" class="{{isSummaryLink currentLink}}"><a href="/patients/{{_id}}" id="summary">Summary</a></li>
   <li role="presentation" class="{{isVisitLink currentLink}}"><a href="/patients/{{_id}}/visits" id="visits">Visits</a></li>
-  <li role="presentation" class="{{isMedicationLink currentLink}}"><a href="/patients/{{_id}}/medications" id="medications">Medications</a></li>
   <li role="presentation" class="{{isProfileLink currentLink}}"><a href="/patients/{{_id}}/profile" id="profile">Profile</a></li>     
 </ul>
-{{/with}}
-
-
-
 </template>

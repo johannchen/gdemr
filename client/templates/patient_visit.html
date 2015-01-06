@@ -8,7 +8,6 @@
 
     <div class="row">
       <div class="col-md-12">
-        <h4>Visit</h4>
         {{#with visit}}
         <div class="visit">
           <p><strong>Visit Date: {{visitDate}} </strong>             
@@ -30,30 +29,58 @@
           <p><strong>Subjective: </strong> {{subjective}}</p>
           <p><strong>Physical Exam</strong></p>
           <ul>
+						{{#if physical.general}}
             <li><strong>General: </strong> {{physical.general}}</li>
+						{{/if}}
+						{{#if physical.heent}}
             <li><strong>HEENT: </strong> {{physical.heent}}</li>
+						{{/if}}
+						{{#if physical.neck}}
             <li><strong>Neck: </strong> {{physical.neck}}</li>
+						{{/if}}
+						{{#if physical.respiratory}}
             <li><strong>Respiratory: </strong> {{physical.respiratory}}</li>
+						{{/if}}
+						{{#if physical.cardiac}}
             <li><strong>Cardiac: </strong> {{physical.cardiac}}</li>
+						{{/if}}
+						{{#if physical.abdomen}}
             <li><strong>Abdomen: </strong> {{physical.abdomen}}</li>
+						{{/if}}
+						{{#if physical.gu}}
             <li><strong>GU: </strong> {{physical.gu}}</li>
+						{{/if}}
+						{{#if physical.reactal}}
             <li><strong>Rectal: </strong> {{physical.rectal}}</li>
+						{{/if}}
+						{{#if physical.extremities}}
             <li><strong>Extremities: </strong> {{physical.extremities}}</li>
+						{{/if}}
+						{{#if physical.back}}
             <li><strong>Back: </strong> {{physical.back}}</li>
+						{{/if}}
+						{{#if physical.skin}}
             <li><strong>Skin: </strong> {{physical.skin}}</li>
+						{{/if}}
+						{{#if physical.breast}}
             <li><strong>Breast: </strong> {{physical.breast}}</li>
+						{{/if}}
+						{{#if physical.neuro}}
             <li><strong>Neuro: </strong> {{physical.neuro}}</li>
+						{{/if}}
+						{{#if physical.psych}}
             <li><strong>Psych: </strong> {{physical.psych}}</li>           
+						{{/if}}
           </ul>
 
-          <p><strong>Assessment: </strong> {{assessment}}</p>
           <p><strong>Tests: </strong> {{tests}}</p>
+          <p><strong>Assessment: </strong> {{assessment}}</p>
           <p><strong>Plan: </strong> {{plan}}</p>
           <p><strong>Followup: </strong> {{followUp}}</p>
           <p><strong>Created By: {{userName createdBy}}</strong></p>
-          <p><strong>Created At: {{createdAt}}</strong></p>
+          <p><strong>Created At: {{formatDate createdAt 'long'}}</strong></p>
           <p><strong>Last Updated By: {{userName updatedBy}}</strong></p>
-          <p><strong>Last Updated At: {{updatedAt}}</strong></p>
+          <p><strong>Last Updated At: {{formatDate updatedAt 'long'}}</strong></p>
         </div>
         {{/with}}
         <a href="/patients/{{pid}}/visits/{{vid}}/edit">Edit Visit</a>

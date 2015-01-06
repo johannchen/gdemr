@@ -1,9 +1,8 @@
 Session.setDefault 'patientSearch', null
 
 Template.menu.events
-	'click button.search': ->
+	'submit form': ->
 		Session.set 'patientSearch', $('#patientName').val()
-		#$('#patientName').val('')
 		Router.go '/patients'
-		#false
+		false
 

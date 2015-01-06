@@ -22,47 +22,60 @@
           </div>
           <div class="form-group">
             <label for="vital_sign">Vital Signs</label>
-            <div class="form-inline">
-              <div class="form-group">
-                <label class="sr-only" for="temperature">Temperature </label>
-                <input class="form-control" id="temperature" value="{{vitalSign.temperature}}" placeholder="T (C)" type="text">
+            <div class="row">
+              
+								<div class="col-xs-2">
+                  <label for="temperature">T (&ordm;C)</label>
+                  <input class="form-control" id="temperature" value="{{vitalSign.temperature}}" type="text">                 
+								</div>
+                <div class="col-xs-2">
+                  <label for="bp">BP</label>
+                  <input class="form-control" id="bp" value="{{vitalSign.bp}}" type="text">                  
+                </div>
+                <div class="col-xs-2">
+                  <label for="pulse">Pulse (bpm)</label>
+                  <input class="form-control" id="pulse" value="{{vitalSign.pulse}}" type="text">
+                </div>
+                <div class="col-xs-2">
+                  <label for="rr">RR</label>
+                  <input class="form-control" id="rr" value="{{vitalSign.rr}}" type="text">
+                </div>
+                <div class="col-xs-2">
+                  <label for="o2">O2 (%)</label>
+                  <input class="form-control" id="o2" value="{{vitalSign.o2}}" type="text">
+                </div>
+                <div class="col-xs-2">
+                </div>            								
+						</div>
+            <div class="row">
+              <div class="col-xs-2">
+                <label for="weight">Weight (kg)</label>
+                <input class="form-control" id="weight" value="{{vitalSign.weight}}" type="text">
+
               </div>
-              <div class="form-group">
-                <label class="sr-only" for="bp">BP</label>
-                <input class="form-control" id="bp" value="{{vitalSign.bp}}" placeholder="BP" type="text">
+              <div class="col-xs-2">
+                <label for="height">Height (cm)</label>
+                <input class="form-control" id="height" value="{{vitalSign.height}}" type="text">
               </div>
-              <div class="form-group">
-                <label class="sr-only" for="pulse">Pulse </label>
-                <input class="form-control" id="pulse" value="{{vitalSign.pulse}}" placeholder="P (bpm)" type="text">
+              <div class="col-xs-2">
+                <label for="bmi">BMI </label>
+                <input class="form-control" id="bmi" value="{{vitalSign.bmi}}" type="text">
               </div>
-              <div class="form-group">
-                <label class="sr-only" for="rr">RR</label>
-                <input class="form-control" id="rr" value="{{vitalSign.rr}}" placeholder="RR" type="text">
+              <div class="col-xs-2">
+                <label for="hc">HC (cm)</label>
+                <input class="form-control" id="hc" value="{{vitalSign.hc}}" type="text">
+              </div> 
+              <div class="col-xs-2">
               </div>
-              <div class="form-group">
-                <label class="sr-only" for="o2">Oxygen saturation</label>
-                <input class="form-control" id="o2" value="{{vitalSign.o2}}" placeholder="O2 (%)" type="text">
-              </div>
+              <div class="col-xs-2">
+              </div>        
             </div>
-            <div class="form-inline">
-              <div class="form-group">
-                <label class="sr-only" for="weight">Weight</label>
-                <input class="form-control" id="weight" value="{{vitalSign.weight}}" placeholder="Wt (kg)" type="text">
-              </div>
-              <div class="form-group">
-                <label class="sr-only" for="height">Height</label>
-                <input class="form-control" id="height" value="{{vitalSign.height}}" placeholder="Ht (cm)" type="text">
-              </div>
-              <div class="form-group">
-                <label class="sr-only" for="bmi">BMI </label>
-                <input class="form-control" id="bmi" value="{{vitalSign.bmi}}" placeholder="BMI" type="text">
-              </div>
-              <div class="form-group">
-                <label class="sr-only" for="hc">Pediatric HC</label>
-                <input class="form-control" id="hc" value="{{vitalSign.hc}}" placeholder="HC (cm)" type="text">
-              </div>
+              
+              
+              
             </div>
-          </div>
+            
+
           <div class="form-group">
             <label for="subjective">Subjective </label>
             <textarea class="form-control" id="subjective" value="{{subjective}}" rows="3"></textarea>
@@ -158,12 +171,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="assessment">Assessment</label>
-            <textarea class="form-control" id="assessment" value="{{assessment}}" rows="3"></textarea>
-          </div>
-          <div class="form-group">
             <label for="tests">Tests (Labs / Imaging)</label>
             <textarea class="form-control" id="tests" value="{{tests}}" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="assessment">Assessment</label>
+            <textarea class="form-control" id="assessment" value="{{assessment}}" rows="3"></textarea>
           </div>
           <div class="form-group">
             <label for="plan">Plan (If any new medicine prescription or allergy reaction, please add them at the patient history)</label>
