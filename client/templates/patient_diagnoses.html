@@ -1,0 +1,71 @@
+<template name="patientDiagnoses">
+
+  <div class="container">
+    {{#if isInRole 'admin' 'doctor'}}
+    {{> patientNav}}  
+    <div class="row">
+      <div class="col-lg-6"> 
+        <h4>Diagnoses</h4>         
+				<p><a href="" id="newDiagnosis">New Diagnosis</a></p>
+        <table class="table table-striped">
+          <thead>
+            <th>Diagnosis</th>
+            <th>Date</th>
+            <th>Last Updated By</th>
+            <th>Last Updated At</th>            
+          </thead>
+          <tbody>
+            {{#each diagnoses}}
+            <tr>
+              <td><a href="#" class="diagnosis">{{diagnosis}}</a></td>              
+              <td>{{date}}</td>
+              <td>{{userName updatedBy}}</td>
+              <td>{{formatDate updatedAt 'long'}}</td>             
+            </tr>
+            {{/each}}
+          </tbody>
+				</table>
+			</div>
+      <div class="col-lg-6">
+        <h4>Diagnosis Details View</h4>
+        {{#with selectedDiagnosis}}
+
+        {{#if isEditingDiagnosis}}
+        <form name="allergyForm">
+          <div class="form-group">
+            <label for="diagnosis">Diagnosis</label>
+            <input class="form-control" name="diagnosis" id="diagnosis" value="{{diagnosis}}" required="" type="text">
+          </div>
+          <div class="form-group">
+            <label for="date">Date </label>
+            <input class="form-control" name="date" id="date" value="{{date}}" type="date">
+          </div>
+          <div class="form-group">
+            <label for="details">Details </label>
+            <textarea class="form-control" id="details" rows="3">{{details}}</textarea>
+          </div>
+          <button class="btn btn-primary" id="saveDiagnosis">Save</button>
+        </form>
+
+        {{else}}
+        <p><strong>Diagnosis: </strong>{{diagnosis}}</p>
+        <p><strong>Date: </strong>{{date}}</p>
+        <p><strong>Details: </strong>{{details}}</p>
+        <p>Created At: {{formatDate createdAt 'long'}}</p>
+        <p>Created By: {{userName createdBy}}</p>
+        <p>Last Updated At: {{formatDate updatedAt 'long'}}</p>
+        <p>Last Updated By: {{userName updatedBy}}</p>
+        <div>
+					<a href="" class="btn btn-default" id="editDiagnosis">Edit</a>
+				
+				</div> 
+        {{/if}}                
+        {{/with}} 
+      </div>
+    </div>
+    {{else}}
+    <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
+    {{/if}}
+  </div>       
+
+</template>

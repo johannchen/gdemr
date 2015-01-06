@@ -73,11 +73,11 @@
           <form class="form-inline" name="allergyForm">
             <div class="form-group">
               <label class="sr-only" for="allergy">Medication</label>
-              <input class="form-control" id="allergy" placeholder="Medication" required="" type="text">
+              <input class="form-control" name="allergy" placeholder="Medication" required="" type="text">
             </div>
             <div class="form-group">
               <label class="sr-only" for="reaction">Reaction </label>
-              <input class="form-control" id="reaction" placeholder="Reaction" type="text">
+              <input class="form-control" name="reaction" placeholder="Reaction" type="text">
             </div>
             <button class="btn btn-primary" id="addAllergy">
               <span class="glyphicon glyphicon-ok"></span>
@@ -96,57 +96,84 @@
 						</tbody>
           </table>
           <div class="category">
-            <a href="/patient#/53a839ff3830660002000000/diagnoses">Past Diagnoses</a>
+						<a href="/patients/{{_id}}/diagnoses">Past Diagnoses</a>
           </div>
           <form class="form-inline" name="diagnosisForm">
             <div class="form-group">
-              <label class="sr-only" for="name">Diagnosis</label>
-              <input class="form-control" id="name" placeholder="Diagnosis" required="" type="text">            
+              <label class="sr-only" for="diagnosis">Diagnosis</label>
+              <input class="form-control" id="diagnosis" placeholder="Diagnosis" required="" type="text">            
             </div>
             <div class="form-group">
-              <label class="sr-only" for="year">Year </label>
-              <input class="form-control" id="year" placeholder="Year" type="text">
+              <label class="sr-only" for="diagnosisDate">Date </label>
+              <input class="form-control" id="diagnosisDate" placeholder="Date" type="date">
             </div>
-            <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-primary" id="addDiagnosis"><span class="glyphicon glyphicon-ok"></span></button>
           </form>
           <table class="table">
-            <tbody><!-- ngRepeat: diagnosis in patient.diagnoses --></tbody>
+            <tbody>
+						{{#each diagnoses}}
+              <tr>
+                <td width="40%">
+                  {{diagnosis}}
+                </td>
+                <td>{{date}}</td>
+              </tr>
+              {{/each}}
+						</tbody>
           </table>
           <div class="category">
-            <a href="/patient#/53a839ff3830660002000000/surgeries">Surgical History</a>
+						<a href="/patients/{{_id}}/surgeries">Surgical History</a>
           </div>
           <form class="form-inline" name="surgeryForm">
             <div class="form-group">
-              <label class="sr-only" for="name">Surgery </label>
-              <input class="form-control" id="name" placeholder="Surgery" required="" type="text">
+              <label class="sr-only" for="surgery">Surgery </label>
+              <input class="form-control" id="surgery" placeholder="Surgery" required="" type="text">
               
             </div>
             <div class="form-group">
-              <label class="sr-only" for="year">Year </label>
-              <input class="form-control" id="year" placeholder="Year" type="text">
+              <label class="sr-only" for="surgeryDate">Date</label>
+              <input class="form-control" id="surgeryDate" placeholder="Date" type="date">
             </div>
-            <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-primary" id="addSurgery"><span class="glyphicon glyphicon-ok"></span></button>
           </form>
           <table class="table" id="surgeries">
-            <tbody><!-- ngRepeat: surgery in patient.surgeries --></tbody>
-          </table>
+            <tbody>
+						{{#each surgeries}}
+              <tr>
+                <td width="40%">
+                  {{surgery}}
+                </td>
+                <td>{{date}}</td>
+              </tr>
+              {{/each}}
+						</tbody>
+					</table>
           <div class="category">
-            <a href="/patient#/53a839ff3830660002000000/behaviors">Social History </a>
+						<a href="/patients/{{_id}}/behaviors">Social History </a>
           </div>
           <form class="form-inline" name="behaviorForm">
             <div class="form-group">
-              <label class="sr-only" for="name">Name </label>
-              <input class="form-control" id="name" placeholder="Behavior" required="" type="text">
+              <label class="sr-only" for="behavior">Behavior </label>
+              <input class="form-control" id="behavior" placeholder="Behavior" required="" type="text">
             </div>
             <div class="form-group">
               <label class="sr-only" for="details">Details</label>
               <input class="form-control" id="details" placeholder="Details" type="text">
             </div>
-            <button class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span></button>
+            <button class="btn btn-primary" id="addBehavior"><span class="glyphicon glyphicon-ok"></span></button>
           </form>
           <table class="table" id="social">
-            <tbody><!-- ngRepeat: behavior in patient.behaviors --></tbody>
-          </table>
+            <tbody>
+						{{#each behaviors}}
+              <tr>
+                <td width="40%">
+                  {{behavior}}
+                </td>
+                <td>{{details}}</td>
+              </tr>
+              {{/each}}
+						</tbody>
+					</table>
           <h5>Family History</h5>
           <form class="form-inline" name="familyForm">
             <div class="form-group">

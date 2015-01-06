@@ -34,6 +34,33 @@ Meteor.methods
 		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
 		Patients.update {_id: id, allergies: oldAllergy},
 			$set: {"allergies.$": newAllergy}
+	addDiagnosis: (id, diagnosis) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update id,
+			$push:
+				diagnoses: diagnosis
+	updateDiagnosis: (id, oldDiagnosis, newDiagnosis) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update {_id: id, diagnoses: oldDiagnosis},
+			$set: {"diagnoses.$": newDiagnosis}
+	addSurgery: (id, surgery) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update id,
+			$push:
+				surgeries: surgery
+	updateSurgery: (id, oldSurgery, newSurgery) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update {_id: id, surgeries: oldSurgery},
+			$set: {"surgeries.$": newSurgery}
+	addBehavior: (id, behavior) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update id,
+			$push:
+				behaviors: behavior
+	updateBehavior: (id, oldBehavior, newBehavior) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update {_id: id, behaviors: oldBehavior},
+			$set: {"behaviors.$": newBehavior}
 	resetDB: ->
 		# for dev, remove on prod
 		Patients.remove({})

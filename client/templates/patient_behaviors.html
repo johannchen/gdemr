@@ -1,0 +1,66 @@
+<template name="patientBehaviors">
+
+  <div class="container">
+    {{#if isInRole 'admin' 'doctor'}}
+    {{> patientNav}}  
+    <div class="row">
+      <div class="col-lg-6"> 
+        <h4>Social History</h4>         
+				<p><a href="" id="newBehavior">New Behavior</a></p>
+        <table class="table table-striped">
+          <thead>
+            <th>Behavior</th>
+            <th>Details</th>
+            <th>Last Updated By</th>
+            <th>Last Updated At</th>            
+          </thead>
+          <tbody>
+            {{#each behaviors}}
+            <tr>
+              <td><a href="#" class="behavior">{{behavior}}</a></td>              
+              <td>{{details}}</td>
+              <td>{{userName updatedBy}}</td>
+              <td>{{formatDate updatedAt 'long'}}</td>             
+            </tr>
+            {{/each}}
+          </tbody>
+				</table>
+			</div>
+      <div class="col-lg-6">
+        <h4>Behavior Details View</h4>
+        {{#with selectedBehavior}}
+
+        {{#if isEditingBehavior}}
+        <form name="behaviorForm">
+          <div class="form-group">
+            <label for="behavior">Behavior</label>
+            <input class="form-control" name="behavior" id="behavior" value="{{behavior}}" required="" type="text">
+          </div>
+          <div class="form-group">
+            <label for="details">Details</label>
+            <input class="form-control" name="details" id="details" value="{{details}}" type="text">
+          </div>
+          <button class="btn btn-primary" id="saveBehavior">Save</button>
+        </form>
+
+        {{else}}
+        <p><strong>Behavior: </strong>{{behavior}}</p>
+        <p><strong>Details: </strong>{{details}}</p>
+        <p>Created At: {{formatDate createdAt 'long'}}</p>
+        <p>Created By: {{userName createdBy}}</p>
+        <p>Last Updated At: {{formatDate updatedAt 'long'}}</p>
+        <p>Last Updated By: {{userName updatedBy}}</p>
+        <div>
+					<a href="" class="btn btn-default" id="editBehavior">Edit</a>
+				
+				</div> 
+        {{/if}}                
+        {{/with}} 
+      </div>
+    </div>
+    {{else}}
+    <div class="alert alert-warning" role="alert">Only doctors can see this page!</div>
+    {{/if}}
+  </div>       
+
+</template>
