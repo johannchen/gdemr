@@ -7,35 +7,38 @@ UI.registerHelper 'isFemale', (gender) ->
 Template.patientProfileForm.events
 	'click button.save': ->
 		name = $('#name').val()
-		profile =
-			gender: $('input[name=gender]:checked').val()
-			birthday: $('#birthday').val()
-			email: $('#email').val()
-			phone: $('#phone').val()
-			insurance: $('#insurance').val()
-			occupation: $('#occupation').val()
-			company: $('#company').val()
-			nationality: $('#nationality').val()
-			address:
-				province: $('#province').val()
-				city: $('#city').val()
-				district: $('#district').val()
-				street: $('#street').val()
-				complex: $('#complex').val()
-			updatedAt: new Date()
-			updatedBy: Meteor.userId()
+		if name
+			profile =
+				gender: $('input[name=gender]:checked').val()
+				birthday: $('#birthday').val()
+				email: $('#email').val()
+				phone: $('#phone').val()
+				insurance: $('#insurance').val()
+				occupation: $('#occupation').val()
+				company: $('#company').val()
+				nationality: $('#nationality').val()
+				address:
+					province: $('#province').val()
+					city: $('#city').val()
+					district: $('#district').val()
+					street: $('#street').val()
+					complex: $('#complex').val()
+				updatedAt: new Date()
+				updatedBy: Meteor.userId()
 
-		pid = $('#pid').val()
-		if (pid)
-			Patients.update pid,
-				$set: {profile: data},
-			Router.go '/patients/' + pid + '/profile'
+			pid = $('#pid').val()
+			if (pid)
+				Patients.update pid,
+					$set: {profile: data},
+				Router.go '/patients/' + pid + '/profile'
+			else
+				Meteor.call 'addPatient', name, profile, (error, result) ->
+					if (error)
+					else
+						# set session patientId? more effectient than set data in route?
+						Session.set 'pid', result
+						Session.set 'currentLink', 'profile'
+						Router.go '/patients/' + result + '/profile'
 		else
-			Meteor.call 'addPatient', name, profile, (error, result) ->
-				if (error)
-				else
-					# set session patientId? more effectient than set data in route?
-					Session.set 'pid', result
-					Session.set 'currentLink', 'profile'
-					Router.go '/patients/' + result + '/profile'
+			alert "Patient name cannot be blank!"
 			

@@ -18,21 +18,25 @@ Template.patientDiagnoses.events
 		template.isEditingDiagnosis.set true
 		template.selectedDiagnosis.set {}
 	'click #saveDiagnosis': (event, template) ->
-		oldDiagnosis = template.selectedDiagnosis.get()
-		newDiagnosis =
-			diagnosis: $('#diagnosis').val()
-			date: $('#date').val()
-			details: $('#details').val()
-			updatedBy: Meteor.userId()
-			updatedAt: new Date()
-		if $.isEmptyObject(oldDiagnosis)
-			newDiagnosis.createdBy = Meteor.userId()
-			newDiagnosis.createdAt = new Date()
-			Meteor.call('addDiagnosis', Session.get('pid'), newDiagnosis)
+		diagnosis = $('#diagnosis').val()
+		if diagnosis
+			oldDiagnosis = template.selectedDiagnosis.get()
+			newDiagnosis =
+				diagnosis: diagnosis
+				date: $('#date').val()
+				details: $('#details').val()
+				updatedBy: Meteor.userId()
+				updatedAt: new Date()
+			if $.isEmptyObject(oldDiagnosis)
+				newDiagnosis.createdBy = Meteor.userId()
+				newDiagnosis.createdAt = new Date()
+				Meteor.call('addDiagnosis', Session.get('pid'), newDiagnosis)
+			else
+				newDiagnosis.createdBy = oldDiagnosis.createdBy
+				newDiagnosis.createdAt = oldDiagnosis.createdAt
+				Meteor.call('updateDiagnosis', Session.get('pid'), oldDiagnosis, newDiagnosis)
+			template.selectedDiagnosis.set newDiagnosis
+			template.isEditingDiagnosis.set false
 		else
-			newDiagnosis.createdBy = oldDiagnosis.createdBy
-			newDiagnosis.createdAt = oldDiagnosis.createdAt
-			Meteor.call('updateDiagnosis', Session.get('pid'), oldDiagnosis, newDiagnosis)
-		template.selectedDiagnosis.set newDiagnosis
-		template.isEditingDiagnosis.set false
+			alert "Diagnosis cannot be blank!"
 		false

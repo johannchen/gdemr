@@ -18,21 +18,25 @@ Template.patientSurgeries.events
 		template.isEditingSurgery.set true
 		template.selectedSurgery.set {}
 	'click #saveSurgery': (event, template) ->
-		oldSurgery = template.selectedSurgery.get()
-		newSurgery =
-			surgery: $('#surgery').val()
-			date: $('#date').val()
-			details: $('#details').val()
-			updatedBy: Meteor.userId()
-			updatedAt: new Date()
-		if $.isEmptyObject(oldSurgery)
-			newSurgery.createdBy = Meteor.userId()
-			newSurgery.createdAt = new Date()
-			Meteor.call('addSurgery', Session.get('pid'), newSurgery)
+		surgery = $('#surgery').val()
+		if surgery
+			oldSurgery = template.selectedSurgery.get()
+			newSurgery =
+				surgery: surgery
+				date: $('#date').val()
+				details: $('#details').val()
+				updatedBy: Meteor.userId()
+				updatedAt: new Date()
+			if $.isEmptyObject(oldSurgery)
+				newSurgery.createdBy = Meteor.userId()
+				newSurgery.createdAt = new Date()
+				Meteor.call('addSurgery', Session.get('pid'), newSurgery)
+			else
+				newSurgery.createdBy = oldSurgery.createdBy
+				newSurgery.createdAt = oldSurgery.createdAt
+				Meteor.call('updateSurgery', Session.get('pid'), oldSurgery, newSurgery)
+			template.selectedSurgery.set newSurgery
+			template.isEditingSurgery.set false
 		else
-			newSurgery.createdBy = oldSurgery.createdBy
-			newSurgery.createdAt = oldSurgery.createdAt
-			Meteor.call('updateSurgery', Session.get('pid'), oldSurgery, newSurgery)
-		template.selectedSurgery.set newSurgery
-		template.isEditingSurgery.set false
+			alert "Surgery cannot be blank!"
 		false

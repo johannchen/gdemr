@@ -61,6 +61,11 @@ Meteor.methods
 		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
 		Patients.update {_id: id, behaviors: oldBehavior},
 			$set: {"behaviors.$": newBehavior}
+	addRelation: (id, relation) ->
+		throw new Meteor.Error "not-authorized" unless Roles.userIsInRole(Meteor.userId(), ['admin', 'doctor'])
+		Patients.update id,
+			$push:
+				relations: relation
 	resetDB: ->
 		# for dev, remove on prod
 		Patients.remove({})

@@ -18,21 +18,25 @@ Template.patientAllergies.events
 		template.isEditingAllergy.set true
 		template.selectedAllergy.set {}
 	'click #saveAllergy': (event, template) ->
-		oldAllergy = template.selectedAllergy.get()
-		newAllergy =
-			medication: $('#medication').val()
-			reaction: $('#reaction').val()
-			details: $('#details').val()
-			updatedBy: Meteor.userId()
-			updatedAt: new Date()
-		if $.isEmptyObject(oldAllergy)
-			newAllergy.createdBy = Meteor.userId()
-			newAllergy.createdAt = new Date()
-			Meteor.call('addAllergy', Session.get('pid'), newAllergy)
+		medication = $('#medication').val()
+		if medication
+			oldAllergy = template.selectedAllergy.get()
+			newAllergy =
+				medication: medication
+				reaction: $('#reaction').val()
+				details: $('#details').val()
+				updatedBy: Meteor.userId()
+				updatedAt: new Date()
+			if $.isEmptyObject(oldAllergy)
+				newAllergy.createdBy = Meteor.userId()
+				newAllergy.createdAt = new Date()
+				Meteor.call('addAllergy', Session.get('pid'), newAllergy)
+			else
+				newAllergy.createdBy = oldAllergy.createdBy
+				newAllergy.createdAt = oldAllergy.createdAt
+				Meteor.call('updateAllergy', Session.get('pid'), oldAllergy, newAllergy)
+			template.selectedAllergy.set newAllergy
+			template.isEditingAllergy.set false
 		else
-			newAllergy.createdBy = oldAllergy.createdBy
-			newAllergy.createdAt = oldAllergy.createdAt
-			Meteor.call('updateAllergy', Session.get('pid'), oldAllergy, newAllergy)
-		template.selectedAllergy.set newAllergy
-		template.isEditingAllergy.set false
+			alert "Medication cannot be blank!"
 		false

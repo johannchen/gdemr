@@ -23,26 +23,29 @@ Template.patientMedications.helpers
 	editingMed: ->
 		Session.get 'editingMed'
 
-
 Template.patientMedications.events
 	'click .med': ->
 		Session.set 'med', @
 	'click #editMed': ->
 		Session.set 'editingMed', true
 	'click #saveMed': ->
-		oldMed = Session.get('med')
-		newMed = 
-			name: $('#medication').val()
-			dose: $('#dose').val()
-			details: $('#details').val()
-			active: oldMed.active
-			createdBy: oldMed.createdBy
-			createdAt: oldMed.createdAt
-			updatedBy: Meteor.userId()
-			updatedAt: new Date()
-		Meteor.call('updateMedication', Session.get('pid'), oldMed, newMed)
-		Session.set 'med', newMed
-		Session.set 'editingMed', null
+		name = $('#medication').val()
+		if name
+			oldMed = Session.get('med')
+			newMed =
+				name: name 
+				dose: $('#dose').val()
+				details: $('#details').val()
+				active: oldMed.active
+				createdBy: oldMed.createdBy
+				createdAt: oldMed.createdAt
+				updatedBy: Meteor.userId()
+				updatedAt: new Date()
+			Meteor.call('updateMedication', Session.get('pid'), oldMed, newMed)
+			Session.set 'med', newMed
+			Session.set 'editingMed', null
+		else
+			alert "Medication name cannot be blank!"
 		false
 	'click button#startMed': ->
 		med = Session.get 'med'

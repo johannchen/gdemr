@@ -8,36 +8,87 @@
       <div class="row">
         <div class="col-md-6">
           <h4>Last Visit</h4>
-          <div class="visit">
-            <p><strong>Visit Date: </strong>
-              
-            </p>
-            <p><strong>Chief Complaint: </strong></p>
-            <p></p>
-            <ul class="list-inline">
-              <li><strong>T: </strong></li>
-              <li><strong>BP: </strong></li>
-              <li><strong>P:</strong></li>
-              <li><strong>RR: </strong></li>
-              <li><strong>O2: </strong></li>
-            </ul>
-            <ul class="list-inline">
-              <li><strong>Wt: </strong></li>
-              <li><strong>Ht:</strong></li>
-              <li><strong>BMI: </strong></li>
-              <li><strong>HC: </strong></li>
-            </ul>
-            <p></p>
-            <p><strong>Assessment: </strong></p>
-            <p><strong>Tests: </strong></p>
-            <p><strong>Plan: </strong></p>
-            <p><strong>Followup: </strong></p>
-            <p><strong>Last Updated By: </strong></p>
-            <p><strong>Last Updated On: </strong></p>
-          </div>
-          <a href="/patients/{{_id}}/visits/new">New Visit</a>
-          <h4>Recent Visit</h4>
+				{{#with lastVisit}}
+        <div class="visit">
+          <p><strong>Visit Date: {{visitDate}} </strong>             
+          </p>
+          <p><strong>Chief Complaint: </strong> {{chiefComplaint}}</p>            
+          <ul class="list-inline">
+            <li><strong>T </strong>(&ordm;C): {{vitalSign.temperature}}</li>
+            <li><strong>BP</strong>: {{vitalSign.bp}}</li>
+            <li><strong>P </strong>(bpm): {{vitalSign.pulse}}</li>
+            <li><strong>RR </strong>: {{vitalSign.rr}}</li>
+            <li><strong>O2 </strong>(%): {{vitalSign.o2}}</li>
+          </ul>
+          <ul class="list-inline">
+            <li><strong>Wt </strong>(kg): {{vitalSign.weight}}</li>
+            <li><strong>Ht </strong>(cm): {{vitalSign.height}}</li>
+            <li><strong>BMI </strong>: {{vitalSign.bmi}}</li>
+            <li><strong>HC </strong>(cm): {{vitalSign.hc}}</li>
+          </ul>
+          <p><strong>Subjective: </strong> {{subjective}}</p>
+          <p><strong>Physical Exam</strong></p>
+          <ul>
+						{{#if physical.general}}
+            <li><strong>General: </strong> {{physical.general}}</li>
+						{{/if}}
+						{{#if physical.heent}}
+            <li><strong>HEENT: </strong> {{physical.heent}}</li>
+						{{/if}}
+						{{#if physical.neck}}
+            <li><strong>Neck: </strong> {{physical.neck}}</li>
+						{{/if}}
+						{{#if physical.respiratory}}
+            <li><strong>Respiratory: </strong> {{physical.respiratory}}</li>
+						{{/if}}
+						{{#if physical.cardiac}}
+            <li><strong>Cardiac: </strong> {{physical.cardiac}}</li>
+						{{/if}}
+						{{#if physical.abdomen}}
+            <li><strong>Abdomen: </strong> {{physical.abdomen}}</li>
+						{{/if}}
+						{{#if physical.gu}}
+            <li><strong>GU: </strong> {{physical.gu}}</li>
+						{{/if}}
+						{{#if physical.reactal}}
+            <li><strong>Rectal: </strong> {{physical.rectal}}</li>
+						{{/if}}
+						{{#if physical.extremities}}
+            <li><strong>Extremities: </strong> {{physical.extremities}}</li>
+						{{/if}}
+						{{#if physical.back}}
+            <li><strong>Back: </strong> {{physical.back}}</li>
+						{{/if}}
+						{{#if physical.skin}}
+            <li><strong>Skin: </strong> {{physical.skin}}</li>
+						{{/if}}
+						{{#if physical.breast}}
+            <li><strong>Breast: </strong> {{physical.breast}}</li>
+						{{/if}}
+						{{#if physical.neuro}}
+            <li><strong>Neuro: </strong> {{physical.neuro}}</li>
+						{{/if}}
+						{{#if physical.psych}}
+            <li><strong>Psych: </strong> {{physical.psych}}</li>           
+						{{/if}}
+          </ul>
+
+          <p><strong>Tests: </strong> {{tests}}</p>
+          <p><strong>Assessment: </strong> {{assessment}}</p>
+          <p><strong>Plan: </strong> {{plan}}</p>
+          <p><strong>Followup: </strong> {{followUp}}</p>
+          <p><strong>Created By: {{userName createdBy}}</strong></p>
+          <p><strong>Created At: {{formatDate createdAt 'long'}}</strong></p>
+          <p><strong>Last Updated By: {{userName updatedBy}}</strong></p>
+          <p><strong>Last Updated At: {{formatDate updatedAt 'long'}}</strong></p>
+        </div>
+        {{/with}}
+          <a href="/patients/{{_id}}/visits/new" class="visit-link">New Visit</a>
+          <h4>Recent Visits</h4>
           <ul class="list-unstyled">
+						{{#each recentVisits}}
+						<li><a href="/patients/{{../_id}}/visits/{{_id}}" class="visit-link">{{visitDate}}</a> {{chiefComplaint}}</li>
+						{{/each}}
           </ul>
         </div>
         <div class="col-md-6">
